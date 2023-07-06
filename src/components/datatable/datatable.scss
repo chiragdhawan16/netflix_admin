@@ -1,0 +1,84 @@
+.datatable{
+
+        .datatabletitle{
+            width:95%;
+            font-size: 24px;
+            color: gray;
+             margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+
+            .link{
+                text-decoration: none;
+                color:green;
+                font-size: 16px;
+                font-weight: 400;
+                border :1px solid green;
+                padding: 2px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+       }
+
+        .cellwithimg{
+            display: flex;
+            align-items: center;
+
+            .cellimg{
+                width:32px;
+                height: 32px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 20px;
+            }
+
+        }
+
+        .cellwithstatus{
+            padding: 5px;
+            border-radius: 5px;
+
+            &.active{
+                color:green;
+                background-color: rgba(0, 128, 0, 0.426);
+            }
+           
+            &.approved{
+                color:green;
+                background-color: rgba(0, 128, 0, 0.426);
+            }
+            &.pending{
+                color:goldenrod;
+                background-color: rgba(255, 255, 0, 0.408);
+
+            }
+        }
+
+        .cellaction{
+            display:flex;
+            align-items: center;
+            gap: 15px;
+
+            .viewbutton{
+                padding: 2px 5px;
+                border-radius: 5px;
+                color: darkblue;
+                border: 1px solid rgba(0, 0, 139, 0.322);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+
+            .deletebutton{
+                padding: 2px 5px;
+                border-radius: 5px;
+                color: crimson;
+                border: 1px solid rgba(220, 20, 60, 0.284);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+        }
+}

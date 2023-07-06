@@ -1,0 +1,44 @@
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    
+
+        .logincontainer{
+            -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+            box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+            padding: 20px ;
+            width: 20%;
+            
+
+
+            .inputfield{
+                display: flex;
+                flex-direction: column;
+
+                .label{
+                    padding: 5px 0;
+                    font-size: 14px;
+                    font-weight:500;
+                }
+                .input{
+                    padding: 5px;
+                    margin-bottom: 10px;
+                    border: none;
+                    border-bottom: 1px solid ;
+                    outline: none;
+                    font-size: 14px;
+                    
+                }
+                .button{
+                    padding: 10px;
+                    background-color: black;
+                    color: white;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+}

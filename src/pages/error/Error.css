@@ -1,0 +1,25 @@
+.error-page-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.error-page-section div{
+    font-size:600%;
+font-weight: bolder;
+}
+.error-page-section p{
+    font-size:150%;
+    font-weight: bolder;
+}
+
+.error-page-section a{
+    text-decoration: none;
+    color: rgb(55, 44, 44);
+    border: 1px;
+    border-style: solid;
+    padding: 1rem;
+    margin-top: 1rem;
+}

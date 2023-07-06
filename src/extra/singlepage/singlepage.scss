@@ -1,0 +1,84 @@
+.single{
+    display: flex;
+    width: 100%;
+    
+
+    .singlecontainer{
+        flex:6;
+
+        .top{
+            padding: 20px;
+            display: flex;
+            gap:20px;
+
+            .left{
+                flex:1;
+                padding: 20px;
+                -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+                box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+                position: relative;
+
+                .editbutton{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 5px;
+                    font-size: 12px;
+                    color:#7451f8;
+                    background-color: #7551f849;
+                    cursor: pointer;
+                    border-radius: 0px 0px 0px 5px;
+                }
+
+                .item{
+                    display: flex;
+                    gap:20px;
+
+                    .itemimg{
+                        width:100px;
+                        height:100px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .details{
+                        .itemtitle{
+                            margin-bottom: 10px;
+                            color:#555;
+                        }
+                        .detailitem{
+                            margin-bottom: 10px;
+                            font-size: 14px;
+
+                            .itemkey{
+                                font-weight:bold ;
+                                color:gray;
+                                margin-right: 5px;
+                            }
+                            .itemvalue{
+                                font-weight: 300;
+                            }
+
+
+                        }
+
+                    }
+                }
+            }
+
+            .right{
+                flex:2;
+            }
+
+        }
+
+        .bottom{
+            -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+            box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+            padding: 20px;
+            margin: 10px 20px;
+        }
+    }
+
+
+}

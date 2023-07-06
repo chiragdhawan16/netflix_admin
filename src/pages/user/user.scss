@@ -1,0 +1,160 @@
+.user{
+    display: flex;
+    width: 100%;
+    
+
+    .usercontainer{
+        flex:6;
+
+        .top{
+            padding: 20px;
+            display: flex;
+            gap:20px;
+
+            .left{
+                flex:1;
+                padding: 20px;
+                -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+                box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+                
+
+                .item{
+                    display: flex;
+                    gap:20px;
+
+                    .itemimg{
+                        width:100px;
+                        height:100px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .details{
+                        .itemtitle{
+                            margin-bottom: 10px;
+                            color:#555;
+                        }
+                        .detailitem{
+                            margin-bottom: 10px;
+                            font-size: 14px;
+
+                            .itemkey{
+                                font-weight:bold ;
+                                color:gray;
+                                margin-right: 5px;
+                            }
+                            .itemvalue{
+                                font-weight: 300;
+                            }
+
+
+                        }
+
+                    }
+                }
+            }
+
+            .right{
+                flex:2;
+                display: flex;
+                align-items: center;
+                -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+                box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+                
+
+                 .leftimg{
+                    padding: 10px;
+                    flex: 1;
+                    
+                    img{
+                        width: 212px;
+                        height: 212px;
+                        border-radius: 50%;
+                        
+                    }
+                 }
+
+                 .rightinfo{
+                    flex: 3;
+                    padding: 10px;
+
+                    .title{
+                        padding: 10px;
+                        font-size: x-large;
+                        font-weight: bold;
+                    }
+
+                    form{
+                        padding: 10px;
+                        
+                        .formfileuploadinput{
+                            display: flex;
+                            flex-direction: column;
+                            margin-bottom: 10px;
+                            color:#555;
+                            
+                            .uploadicon{
+                                color:#7451f8;
+                            background-color: #7551f849;
+                                border-radius: 5%;
+                                padding: 5px;
+                                text-align: center;
+                            }
+                            label{
+                                margin-bottom: 5px;
+                                
+                            }
+
+                            input{
+                                font-size: 16px;
+                                }
+
+                        }
+                        .forminput{
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            margin-bottom: 10px;
+
+                            label{
+                                margin-bottom: 5px;
+                                
+                            }
+                            .input{
+                                font-size: 16px;
+                                border: none;
+                                border-bottom: 1px solid;
+
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
+
+                        }
+                    
+                        button{
+                            padding: 5px;
+                            color:#7451f8;
+                            background-color: #7551f849;
+                            cursor: pointer;
+                            border: 1px solid #7451f8 ;
+
+                        }
+                    
+                    }
+                 }
+
+            }
+
+        }
+
+        .bottom{
+            -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+            box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+            padding: 20px;
+            margin: 10px 20px;
+        }
+    }
+
+
+}

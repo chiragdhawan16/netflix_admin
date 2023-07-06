@@ -1,0 +1,140 @@
+.movie{
+    display: flex;
+    width: 100%;
+    
+
+    .moviecontainer{
+         flex:6;
+         
+
+        .top{
+            padding: 20px;
+            display: flex;
+            margin: 10px auto; 
+            width: 80%;
+            gap: 10px;
+            
+            .left{
+                flex: 1;
+                 -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+                    box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+                    padding: 15px 5px;
+                .leftitem{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .leftitemimage{
+                        width: 80%;
+                        height: 100px;
+                        background-color:lightgrey;
+                        
+                    }
+                }
+            }
+
+            .right{
+                 flex: 3;
+                -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+                box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+                
+
+                 .rightinfo{
+                    padding: 10px;
+
+                    .title{
+                        padding: 10px;
+                        font-size: x-large;
+                        font-weight: bold;
+                        padding-left: 20px;
+                        
+                    }
+
+                    form{
+                        padding: 10px;
+                         display: flex;
+                         flex-direction: column;
+                        
+                         .forminput{
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            margin-right: 10px;
+
+                            label{
+                                margin-bottom: 5px;
+                                
+                            }
+                            .input{
+                                font-size: 16px;
+                                border: none;
+                                border-bottom: 1px solid;
+                                margin-bottom: 10px;
+
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
+
+                        }
+
+                        .uploadicon{
+                            width: 100%;
+                            color:#555;
+                            margin-bottom: 10px;
+                            padding: 5px;
+                            color:#7451f8;
+                            background-color: #7551f849;
+                            border-radius: 5%;
+                            padding: 5px;
+                            text-align: center;
+                            cursor: pointer;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                                
+                            }
+
+                            input{
+                                font-size: 16px;
+                                }
+                        
+                    
+                        button{
+                            padding: 5px;
+                            color:#7451f8;
+                            background-color: #7551f849;
+                            cursor: pointer;
+                            border: 1px solid #7451f8 ;
+                            border-radius: 5px;
+                            width: 100px;
+
+                            // &.true{
+                                
+                            //    background-color: red;
+                            // }
+                            // &.false{
+                            //     visibility: visible;
+                            //     background-color: red;
+                            // }
+
+                        }
+                        
+
+                    
+                    }
+                 }
+
+            }
+
+        }
+
+        .bottom{
+            -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
+            box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29);
+            padding: 20px;
+            margin: 10px 20px;
+        }
+    }
+
+
+}
