@@ -1,20 +1,15 @@
-import React, { useEffect, useState  } from 'react'
+import React, {  useState  } from 'react'
 import './newmovie.scss'
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
-import List from '../../components/list/List';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import axios from 'axios';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {storage} from "../../firebase"
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
-import { create } from '@mui/material/styles/createTransitions';
 import { CircularProgress } from '@mui/material';
 
 const NewMovie = () => {
-    const[noimage,setNoimage]=useState("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/users%2Fno_image.png?alt=media&token=f8044609-d880-4171-b9fc-dc32e184a59c");
-    const params = useParams();
+    const[noimage,setNoimage]=useState("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/noimage.png?alt=media&token=29505b09-340e-4977-a49a-f33cd01402b3");
     const[title,setTitle]=useState("")
     const[desc,setDesc]=useState("")
     const[img,setImg]=useState("")
@@ -37,11 +32,8 @@ const NewMovie = () => {
     const [imgprogress,setImgProgress]=useState(0);
     const [imgSmprogress,setImgSmProgress]=useState(0);
     const [imgTitleprogress,setImgTitleProgress]=useState(0);
-    
+    const [progressbar,setProgreesBar]=useState("false")
 
-
-    const [movie,setMovie]=useState({})
-    const [movies,setMovies]=useState([])
     const navigate =useNavigate() 
 
 
@@ -214,7 +206,7 @@ const profilePicUpload=(e,filetype)=>{
     const createmovie=async(e)=>{
       e.preventDefault()
        try {
-
+        setProgreesBar("true")
         const res = await axios.post(`${process.env.REACT_APP_API}/api/movies/`,{title,desc,img,imgSm,imgTitle,video,trailer,year,limit,genre,isSeries}, {
           headers: {
            
@@ -224,24 +216,26 @@ const profilePicUpload=(e,filetype)=>{
   
         
         if(res.data.success){
-        setMovie(res.data.savedMovie)
+          setProgreesBar("false")
         alert(res.data.message)
           navigate("/movies") 
         }
         else{
+          setProgreesBar("false")
           alert(res.data.message)
         }
       } catch (error) {
+        setProgreesBar("false")
         console.log(error)
+        alert("Issue in creating movie")
       }
   
     }
 
-
     
     return (
-      <div className='newmovie'>
-        
+      <div className={`newmovie ${progressbar}`}>
+         <CircularProgress className={progressbar} disableShrink/>
         <Sidebar/>
         <div className='newmoviecontainer'>
           <Navbar/>
@@ -250,7 +244,7 @@ const profilePicUpload=(e,filetype)=>{
           <div className='left'>
                   <div className='leftitem'>
                     <p className='leftitemheading'>Main image</p>
-                    <img  className='leftitemimage' src={img ? img : noimage}/>
+                    <img  className='leftitemimage' src={img ? img : noimage} />
                   </div>
                   <div className='leftitem'>
                     <p className='leftitemheading'>Small image</p>

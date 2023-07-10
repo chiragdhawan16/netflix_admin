@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import {storage} from "../../firebase"
 import {getDownloadURL, ref,uploadBytes, uploadBytesResumable} from 'firebase/storage'
+import { CircularProgress } from '@mui/material';
 
 const User = () => {
   const [file,setFile]=useState(null);
@@ -21,29 +22,8 @@ const User = () => {
   
   const [users,setUsers]=useState([])
   const navigate =useNavigate()
+  const [progressbar,setProgreesBar]=useState("false")
 
-//     const getusers=async()=>{
-//         try {
-//             const res = await axios.get("http://localhost:8080/api/users", {
-//               headers: {
-                
-//                  token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
-//               },
-//             });
-//              setUsers(res.data.users);
-             
-             
-//           } catch (err) {
-//             console.log(err);
-//           }   
-//     }
-//     useEffect(() => {
-//       getusers();
-
-//     }, [user]);
-
-// const userColumns=["Id","User","Email","Admin"]
-  
     
 
 const profilePicUpload=(e)=>{
@@ -104,11 +84,11 @@ const profilePicUpload=(e)=>{
       
       if(profilePic==="") 
       {
-        setProfilePic("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/users%2Fno_image.png?alt=media&token=f8044609-d880-4171-b9fc-dc32e184a59c")
+        setProfilePic("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/noimage.png?alt=media&token=29505b09-340e-4977-a49a-f33cd01402b3")
       }
     
     try {
-      
+      setProgreesBar("true")
       const res = await axios.put(`${process.env.REACT_APP_API}/api/users/${params.userid}`,{username,email,profilePic,isAdmin}, {
         headers: {
           
@@ -122,12 +102,15 @@ const profilePicUpload=(e)=>{
               email:email,
               profilePic:profilePic,
               isAdmin:JSON.parse(isAdmin),})
+              setProgreesBar("false")
               alert(res.data.message)     
       }
       else{
+        setProgreesBar("false")
         alert(res.data.message)
       }
     } catch (error) {
+      setProgreesBar("false")
       alert("Error in updating user")
     }
 
@@ -159,7 +142,8 @@ useEffect(() => {
 
 
   return (
-    <div className='user'>
+    <div className={`user ${progressbar}`}>
+      <CircularProgress className={progressbar} disableShrink/>
       <Sidebar/>
       <div className='usercontainer'>
         <Navbar/>
@@ -168,7 +152,7 @@ useEffect(() => {
             
             <h1 className='title'>Information</h1>
             <div className='item'>
-              <img src={user.profilePic? user.profilePic : "https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/users%2Fno_image.png?alt=media&token=f8044609-d880-4171-b9fc-dc32e184a59c"} alt="item" className='itemimg'/>
+              <img src={user.profilePic? user.profilePic : "https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/noimage.png?alt=media&token=29505b09-340e-4977-a49a-f33cd01402b3"} alt="item" className='itemimg'/>
               
               <div className='details'>
                   <h1 className='itemtitle'>{user.username}</h1>

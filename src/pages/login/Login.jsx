@@ -3,20 +3,24 @@ import './login.scss'
 import { useNavigate } from "react-router-dom";
  import axios from 'axios'
  import { useAuth } from '../../context/auth';
+ import { CircularProgress } from '@mui/material';
 
 
-const Login = () => {
+
+  const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const usenavigate = useNavigate();
+    const usenavigate = useNavigate();
   const[auth,setAuth]=useAuth();
+  const [progressbar,setProgreesBar]=useState("false")
 
+  
   const handleLogin = async(e) => {
     
     e.preventDefault()
     try {
-      
-       const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/login`, {email,password});
+      setProgreesBar("true")
+       const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/adminlogin`, {email,password});
        
         
         if(res.data.success){
@@ -29,21 +33,23 @@ const Login = () => {
             })
             
              localStorage.setItem('netflixauthadmin',JSON.stringify(res.data));
-             
+             setProgreesBar("false")
              usenavigate("/");
         }
         else{
           alert(res.data.message)
+          setProgreesBar("false")
         }
         
     } catch (error) {
       alert("Issue in Login")
-      
+      setProgreesBar("false")
         
     }
      };
   return (
-    <div className='login'>
+    <div className={`login ${progressbar}`}>
+          <CircularProgress className={progressbar} disableShrink/>
           <div className='logincontainer'>
           <div className='inputfield'>
             <label className='label'>Email</label>

@@ -4,7 +4,23 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    
+    position: relative;
+        &.true{
+             background-color: grey;
+             input{
+                background-color: grey;
+             }
+        }
+        .true{
+            position: absolute;
+            top: 40%;
+            left:50%;
+            z-index: 10;
+            color: white;     
+        }
+        .false{
+           display: none;
+        }
 
         .logincontainer{
             -webkit-box-shadow: 1px 6px 11px 4px rgba(0,0,0,0.29); 
@@ -30,6 +46,7 @@
                     border-bottom: 1px solid ;
                     outline: none;
                     font-size: 14px;
+                    
                     
                 }
                 .button{

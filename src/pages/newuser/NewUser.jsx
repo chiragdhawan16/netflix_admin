@@ -11,6 +11,7 @@ import {  useNavigate, useParams } from "react-router-dom";
 import {storage} from "../../firebase"
 import {getDownloadURL, ref,uploadBytes, uploadBytesResumable} from 'firebase/storage'
 import { userColumns } from '../../dataSource';
+import { CircularProgress } from '@mui/material';
 
 const NewUser = () => {
 
@@ -24,34 +25,13 @@ const NewUser = () => {
     const[password,setPassword]=useState("")
 
     const [users,setUsers]=useState([])
+    const [progressbar,setProgreesBar]=useState("false")
+
 
     const navigate=useNavigate();
 
-//     const getusers=async()=>{
-//         try {
-//             const res = await axios.get("http://localhost:8080/api/users", {
-//               headers: {
-
-                
-//                 token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
-//               },
-//             });
-//              setUsers(res.data.users);
-             
-             
-//           } catch (err) {
-//             console.log(err);
-//           }   
-//     }
-//     useEffect(() => {
-//       getusers();
-//     }, [user]);
-
-// const userColumns=["Id","User","Email","Admin"]
-  
     
     
-  
   const profilePicUpload=(e)=>{
     e.preventDefault()
     setFile(e.target.files[0])
@@ -114,12 +94,12 @@ const NewUser = () => {
       
       if(profilePic==="") 
       {
-        setProfilePic("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/users%2Fno_image.png?alt=media&token=f8044609-d880-4171-b9fc-dc32e184a59c")
+        setProfilePic("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/noimage.png?alt=media&token=29505b09-340e-4977-a49a-f33cd01402b3")
       }
   
       
       try {
-        
+        setProgreesBar("true")
         const res = await axios.post(`${process.env.REACT_APP_API}/api/users/`,{username,email,profilePic,isAdmin,password}, {
           headers: {
             
@@ -133,6 +113,7 @@ const NewUser = () => {
                 email:email,
                 profilePic:profilePic,
                 isAdmin:JSON.parse(isAdmin),})
+                setProgreesBar("false")
                 alert(res.data.message)
                  navigate('/users')
 
@@ -143,20 +124,22 @@ const NewUser = () => {
         setProfilePic("")
         }
         else{
-          
+          setProgreesBar("false")
           alert(res.data.message)
         }
 
       } catch (error) {
+        setProgreesBar("false")
         alert("Issue in creating user")
       }
+   
+    }
   
       
-    }
-   
   
   return (
-    <div className='newuser'>
+    <div className={`newuser ${progressbar}`}>
+      <CircularProgress className={progressbar} disableShrink/>
     <Sidebar/>
     <div className='newusercontainer'>
       <Navbar/>
@@ -165,7 +148,7 @@ const NewUser = () => {
       </div>
       <div className='middle'>
           <div className='leftimg'>
-            <img src={profilePic? profilePic :"https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/users%2Fno_image.png?alt=media&token=f8044609-d880-4171-b9fc-dc32e184a59c" } alt='no'/>`
+            <img src={profilePic? profilePic :"https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/noimage.png?alt=media&token=29505b09-340e-4977-a49a-f33cd01402b3" } alt='no'/>`
             
           </div>
           <div className='rightinfo'>

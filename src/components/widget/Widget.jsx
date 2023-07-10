@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const Widget = ({type}) => {
     let data;
-    
+   
     const [users,setUsers]=useState([])
     const [movies,setMovies]=useState([])
     const [lists,setLists]=useState([])
@@ -26,6 +26,7 @@ const Widget = ({type}) => {
                  token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
               },
             });
+            console.log(res.data)
              setUsers(res.data.users);
              
           } catch (err) {
@@ -81,7 +82,7 @@ const Widget = ({type}) => {
         case "user":
             data={
                 title:"USERS",
-                total:users.length,
+                total:users?.length? users?.length: "0" ,
                 link:"See All Users",
                 linkvalue:"/users/",
                 diff:20,
@@ -96,7 +97,7 @@ const Widget = ({type}) => {
         case "lists":
             data={
                 title:"LISTS",
-                total:lists.length,
+                total:lists?.length ? lists?.length : "0",
                 link:"See All Lists",
                 linkvalue:"/lists/",
                 diff:30,
@@ -111,7 +112,7 @@ const Widget = ({type}) => {
         case "movies":
             data={
                 title:"MOVIES",
-                total:movies.length,
+                total:movies?.length ? movies?.length : "0",
                 link:"See All Movies",
                 linkvalue:"/movies/",
                 diff:40,

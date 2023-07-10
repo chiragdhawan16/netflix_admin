@@ -1,8 +1,24 @@
 .newmovie{
     display: flex;
     width: 100%;
-    
-    
+    position: relative;
+             &.true{
+                  background-color: grey;
+                  input,select{
+                     background-color: grey;
+                  }
+             }
+             .true{
+                 position: absolute;
+                 top: 60%;
+                 left:50%;
+                 z-index: 10;
+                 color: white;     
+             }
+             .false{
+                display: none;
+      
+             }
 
     .newmoviecontainer{
         flex:6;

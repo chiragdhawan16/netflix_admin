@@ -12,7 +12,7 @@ import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
 import { create } from '@mui/material/styles/createTransitions';
 import { CircularProgress } from '@mui/material';
 const Movie = () => {
-        const[noimage,setNoimage]=useState("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/users%2Fno_image.png?alt=media&token=f8044609-d880-4171-b9fc-dc32e184a59c");
+        const[noimage,setNoimage]=useState("https://firebasestorage.googleapis.com/v0/b/netflix-f3af8.appspot.com/o/noimage.png?alt=media&token=29505b09-340e-4977-a49a-f33cd01402b3");
         const params = useParams();
         const[title,setTitle]=useState("")
         const[desc,setDesc]=useState("")
@@ -36,6 +36,7 @@ const Movie = () => {
     const [imgprogress,setImgProgress]=useState(0);
     const [imgSmprogress,setImgSmProgress]=useState(0);
     const [imgTitleprogress,setImgTitleProgress]=useState(0);
+    const [progressbar,setProgreesBar]=useState("false")
 
 
         const [movie,setMovie]=useState({})
@@ -146,6 +147,7 @@ const Movie = () => {
 
         const updatemovie=async(e)=>{
           e.preventDefault()
+          
           if(title==="" )
           { 
             return(alert("Enter Title"))
@@ -210,7 +212,7 @@ const Movie = () => {
           
          
            try {
-
+            setProgreesBar("true")
             const res = await axios.put(`${process.env.REACT_APP_API}/api/movies/${params.movieid }`,{title,desc,img,imgSm,imgTitle,video,trailer,year,limit,genre,isSeries}, {
               headers: {
                
@@ -222,13 +224,18 @@ const Movie = () => {
             if(res.data.success){
             setMovie(res.data.savedMovie)
             alert(res.data.message)
+            setProgreesBar("false")
               navigate("/movies") 
+
             }
             else{
+              setProgreesBar("false")
               alert(res.data.message)
             }
           } catch (error) {
             console.log(error)
+            setProgreesBar("false")
+            alert("Issuein Updating movie")
           }
       
         }
@@ -265,9 +272,10 @@ const Movie = () => {
         getmovie();
       }, []);
       
-      
+           
         return (
-          <div className='movie'>
+          <div className={`movie ${progressbar}`}>
+            <CircularProgress className={progressbar} disableShrink/>
             <Sidebar/>
             <div className='moviecontainer'> 
               <Navbar/>

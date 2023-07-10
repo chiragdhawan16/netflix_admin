@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import {storage} from "../../firebase"
 import {getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
+import { CircularProgress } from '@mui/material';
 
 
 const NewList = () => {
@@ -19,6 +20,7 @@ const NewList = () => {
     const navigate =useNavigate() 
     const[movietitles,setMovieTitles]=useState([])
     const [movies,setMovies]=useState([])
+    const [progressbar,setProgreesBar]=useState("false")
     
     const getmovies=async()=>{
         try {
@@ -63,7 +65,7 @@ const NewList = () => {
         return(alert("Please Select atleast 10 Movies "))
        }   
        try {
-       
+       setProgreesBar("true")
         const res = await axios.post(`${process.env.REACT_APP_API}/api/lists/`,{title,type,genre,content}, {
           headers: {
            
@@ -73,14 +75,18 @@ const NewList = () => {
         
         if(res.data.success){
         setList(res.data.savedList)
+        setProgreesBar("false")
          alert(res.data.message) 
           navigate("/lists") 
         }
         else{
+          setProgreesBar("false")
            alert(res.data.message) 
         }
       } catch (error) {
         console.log(error)
+        setProgreesBar("false")
+        alert("Issue in creating list")
       }
   
     }
@@ -95,9 +101,11 @@ const NewList = () => {
     }
 
 
+
     
     return (
-      <div className='newmovie'>
+      <div className={`newlist ${progressbar}`}>
+        <CircularProgress className={progressbar} disableShrink/>
         <Sidebar/>
         <div className='newmoviecontainer'>
           <Navbar/>
