@@ -26,6 +26,7 @@ const NewUser = () => {
 
     const [users,setUsers]=useState([])
     const [progressbar,setProgreesBar]=useState("false")
+    const [uploading,setUploading]=useState("nouploading")
 
 
     const navigate=useNavigate();
@@ -34,10 +35,11 @@ const NewUser = () => {
     
   const profilePicUpload=(e)=>{
     e.preventDefault()
+    
     setFile(e.target.files[0])
     
     if(e.target.files[0]!==null){
-     
+      setUploading("uploading")
       const imageRef=ref(storage,`users/${e.target.files[0].name}`)
       const uploadtask=uploadBytesResumable(imageRef,e.target.files[0])
       
@@ -47,12 +49,11 @@ const NewUser = () => {
                     ()=>{
                       getDownloadURL(uploadtask.snapshot.ref).then((url)=>{
                         setProfilePic(url)
-                        
+                        setUploading("nouploading")
                       })
                        
                     });
-     
-                               
+      
     }
   }
   
@@ -139,8 +140,11 @@ const NewUser = () => {
   
   return (
     <div className={`newuser ${progressbar}`}>
-      <CircularProgress className={progressbar} disableShrink/>
-    <Sidebar/>
+     
+      {
+        progressbar==="true"? <CircularProgress className={progressbar} disableShrink/>:
+        <>
+        <Sidebar/>
     <div className='newusercontainer'>
       <Navbar/>
       <div className='top'>
@@ -156,9 +160,9 @@ const NewUser = () => {
             <form >
               <div className='formfileuploadinput'>
                 <label htmlFor='file' className='uploadicon'>
-                  {file ? "Upload" : "Upload New Image"}
+                  {file ? file.name : "Upload New Image"}
                   
-                  {/* URL.createObjectURL    */}
+                  <CircularProgress className={uploading} disableShrink/>
                 </label>
                 <input type='file'  id="file" onChange={e=>(profilePicUpload(e))}  required style={{display:"none"}}/>
                 
@@ -202,6 +206,9 @@ const NewUser = () => {
         <List  userColumns={userColumns} userRows={users}/>
       </div>
     </div>
+        </>
+      }
+    
   </div>
   )
 }

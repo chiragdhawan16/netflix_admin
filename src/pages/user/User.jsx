@@ -143,8 +143,11 @@ useEffect(() => {
 
   return (
     <div className={`user ${progressbar}`}>
-      <CircularProgress className={progressbar} disableShrink/>
-      <Sidebar/>
+      
+      {
+        progressbar==="true"?<CircularProgress className={progressbar} disableShrink/>:
+        <>
+         <Sidebar/>
       <div className='usercontainer'>
         <Navbar/>
         <div className='top'>
@@ -222,6 +225,9 @@ useEffect(() => {
           <List userColumns={userColumns} userRows={users}/>
         </div> */}
       </div>
+        </>
+      }
+     
     </div>
   )
 }

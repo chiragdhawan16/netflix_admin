@@ -6,12 +6,16 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import "./listlist.scss"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { CircularProgress } from '@mui/material';
 
 const ListList = () => {
     const [lists,setLists]=useState([])
+    const [progressbar,setProgreesBar]=useState("false")
     
     const getList=async()=>{
+
         try {
+          setProgreesBar("true")
             const res = await axios.get(`${process.env.REACT_APP_API}/api/lists`, {
               headers: {                
                  token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
@@ -19,9 +23,11 @@ const ListList = () => {
             });
             
               setLists(res.data.lists);
+               setProgreesBar("false")
              
           } catch (err) {
             console.log(err);
+             setProgreesBar("false")
           }   
     }
     
@@ -33,8 +39,10 @@ const ListList = () => {
           e.preventDefault()
           
           try {
+            
             const confirmation= window.confirm("Are you sure you want to delete this List?")
            if(confirmation===true){
+            setProgreesBar("true")
             const res = await axios.delete(`${process.env.REACT_APP_API}/api/lists/${id}`, {
               headers: {
                
@@ -43,11 +51,14 @@ const ListList = () => {
             });
             
             getList()
+            setProgreesBar("false")
            }
            
+          
             
           } catch (err) {
             console.log(err);
+            setProgreesBar("false")
           }
     
     }
@@ -72,12 +83,17 @@ const ListList = () => {
     
     
       return (
-        <div className='listlist'>
+        <div className={`listlist ${progressbar}`}>
+          
+          {progressbar==="true"? <CircularProgress className={progressbar} disableShrink/>:
+          <>
           <Sidebar/>
           <div className='listlistcontainer'>
             <Navbar/>
             <Datatable Columns={Columns} Rows={lists} title={"Add New Movie"} page={"lists"}/>
           </div>
+          </>}
+          
         </div>
       )
     

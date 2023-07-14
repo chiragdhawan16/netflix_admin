@@ -7,22 +7,27 @@ import { Link } from 'react-router-dom';
 import "./movielist.scss"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { CircularProgress } from '@mui/material';
 
 const MoviesList = () => {
     
     const [movies,setMovies]=useState([])
+    const [progressbar,setProgreesBar]=useState("false")
     
     const getmovies=async()=>{
         try {
+          setProgreesBar("true")
             const res = await axios.get(`${process.env.REACT_APP_API}/api/movies`, {
               headers: {                
                  token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
               },
             });
              setMovies(res.data.movies);
+              setProgreesBar("false")
              
           } catch (err) {
             console.log(err);
+             setProgreesBar("false")
           }   
     }
     
@@ -36,6 +41,7 @@ const MoviesList = () => {
           try {
             const confirmation= window.confirm("Are you sure you want to delete this Movie?")
              if(confirmation===true){
+              setProgreesBar("true")
             const res = await axios.delete(`${process.env.REACT_APP_API}/api/movies/${id}`, {
               headers: {
                
@@ -44,11 +50,13 @@ const MoviesList = () => {
             });
             
             getmovies()
+            setProgreesBar("false")
            }
            
             
           } catch (err) {
             console.log(err);
+            setProgreesBar("false")
           }
     
     }
@@ -72,7 +80,7 @@ const MoviesList = () => {
         { field: 'isSeries', headerName: 'Movie/Series', width: 100 },
         {field: 'action', headerName: 'Action', width: 170,renderCell:(params)=>{
             return(
-                <div className='cellaction'>
+                <div className='cellaction' >
                   <Link to={`/movies/${params.row._id}`} style={{textDecoration:"none"}}>
                    <div className='viewbutton'><EditIcon/></div>
                    </Link>
@@ -85,12 +93,17 @@ const MoviesList = () => {
     
     
       return (
-        <div className='movielist'>
-          <Sidebar/>
+        <div className= {`movielist ${progressbar}`}>
+          {progressbar==="true"?<CircularProgress className={progressbar} disableShrink/>:
+          <>
+           <Sidebar/>
           <div className='movielistcontainer'>
             <Navbar/>
             <Datatable Columns={Columns} Rows={movies} title={"Add New Movie"} page={"movies"}/>
           </div>
+          </>
+          }
+         
         </div>
       )
     

@@ -2,22 +2,19 @@
     display: flex;
     width: 100%; 
     position: relative;
-             &.true{
-                  background-color: grey;
-                  input,select{
-                     background-color: grey;
-                  }
-             }
-             .true{
-                 position: absolute;
-                 top: 40%;
-                 left:50%;
-                 z-index: 10;
-                 color: white;     
-             }
-             .false{
-                display: none;
-             }
+    &.true{
+        background-color: rgb(183, 180, 180);
+        display: flex;
+       align-items: center;
+       justify-content: center;
+       width: 100%;
+       height: 100vh;
+       
+   }
+   .true{
+       
+       color: rgb(56, 55, 55);     
+   }
 
 
     .newusercontainer{
@@ -80,10 +77,20 @@
                             
                             .uploadicon{
                                 color:#7451f8;
-                            background-color: #7551f849;
+                                background-color: #7551f849;
                                 border-radius: 5%;
                                 padding: 5px;
-                                text-align: center;
+                                display: flex;
+                                align-items: center;
+                                width: 100%;
+                                justify-content: space-between;
+                                height: 40px;
+
+
+                                .nouploading{
+                                    display: none;
+                                }
+                                
                             }
                             label{
                                 margin-bottom: 5px;

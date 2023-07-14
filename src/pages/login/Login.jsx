@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
   const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-    const usenavigate = useNavigate();
+  const usenavigate = useNavigate();
   const[auth,setAuth]=useAuth();
   const [progressbar,setProgreesBar]=useState("false")
 
@@ -49,8 +49,12 @@ import { useNavigate } from "react-router-dom";
      };
   return (
     <div className={`login ${progressbar}`}>
-          <CircularProgress className={progressbar} disableShrink/>
-          <div className='logincontainer'>
+          
+          {
+            progressbar==="true"?
+            <CircularProgress className={progressbar} disableShrink/>:
+            <>
+             <div className='logincontainer'>
           <div className='inputfield'>
             <label className='label'>Email</label>
             <input type='text' className='input' onChange={(e) => setEmail(e.target.value.toLocaleLowerCase())}/>
@@ -64,6 +68,9 @@ import { useNavigate } from "react-router-dom";
           <button className='button' onClick={handleLogin}>Login</button>
           </div>
       </div>
+            </>
+          }
+         
       
     </div>
   )

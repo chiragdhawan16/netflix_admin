@@ -7,24 +7,27 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { CircularProgress } from '@mui/material';
 
 
 const UsersList = () => {
     const [users,setUsers]=useState([])
+    const [progressbar,setProgreesBar]=useState("false")
 
 const getusers=async()=>{
     try {
+      setProgreesBar("true")
         const res = await axios.get(`${process.env.REACT_APP_API}/api/users`, {
           headers: {
-            // token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTEyOTNmY2RkZDkyNDRkYTgxZTQxOSIsImlhdCI6MTY4ODI4NDE1MiwiZXhwIjoxNjg4NzE2MTUyfQ.l6iAaha0ipUT2DGevHipaASorgi8lnKHgYZ1HWxyPr0",
-            
              token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
           },
         });
          setUsers(res.data.users);
+         setProgreesBar("false")
          
       } catch (err) {
         console.log(err);
+        setProgreesBar("false")
       }   
 }
 
@@ -37,7 +40,8 @@ const deleteuser=async(e,id)=>{
       
       try {
         const confirmation= window.confirm("Are you sure you want to delete this user?")
-       if(confirmation===true){
+       if(confirmation==="true"){
+        setProgreesBar("true")
         const res = await axios.delete(`${process.env.REACT_APP_API}/api/users/${id}`, {
           headers: {
           
@@ -46,11 +50,13 @@ const deleteuser=async(e,id)=>{
         });
         
         getusers()
+        setProgreesBar("false")
        }
        
         
       } catch (err) {
         console.log(err);
+        setProgreesBar("false")
       }
 
 }
@@ -83,12 +89,17 @@ const deleteuser=async(e,id)=>{
 
 
   return (
-    <div className='userlist'>
+    <div className={`userlist ${progressbar}`}>
+      {progressbar==="true"?<CircularProgress className={progressbar} disableShrink/>:
+      <>
       <Sidebar/>
       <div className='userlistcontainer'>
         <Navbar/>
         <Datatable Columns={Columns} Rows={users} title={"Add New User"} page={"users"}/>
       </div>
+      </>
+      }
+      
     </div>
   )
 }

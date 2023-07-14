@@ -32,11 +32,11 @@ const Movie = () => {
         const[trailerFile,setTrailerFile]=useState(null)
         const[videoFile,setVideoFile]=useState(null)
         const [trailerprogress,setTrailerProgress]=useState(0);
-    const [videoprogress,setVideoProgress]=useState(0);
-    const [imgprogress,setImgProgress]=useState(0);
-    const [imgSmprogress,setImgSmProgress]=useState(0);
-    const [imgTitleprogress,setImgTitleProgress]=useState(0);
-    const [progressbar,setProgreesBar]=useState("false")
+        const [videoprogress,setVideoProgress]=useState(0);
+        const [imgprogress,setImgProgress]=useState(0);
+        const [imgSmprogress,setImgSmProgress]=useState(0);
+        const [imgTitleprogress,setImgTitleProgress]=useState(0);
+        const [progressbar,setProgreesBar]=useState("false")
 
 
         const [movie,setMovie]=useState({})
@@ -275,7 +275,9 @@ const Movie = () => {
            
         return (
           <div className={`movie ${progressbar}`}>
-            <CircularProgress className={progressbar} disableShrink/>
+            
+            {progressbar==="true"? <CircularProgress className={progressbar} disableShrink/>:
+            <>
             <Sidebar/>
             <div className='moviecontainer'> 
               <Navbar/>
@@ -409,6 +411,9 @@ const Movie = () => {
                 <List userColumns={userColumns} userRows={movies}/>
               </div> */}
             </div>
+            </>
+            }
+            
           </div>
         )
       

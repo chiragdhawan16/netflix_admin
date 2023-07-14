@@ -5,14 +5,15 @@ import Navbar from "../../components/navbar/Navbar";
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
-import Table from "../../components/list/List";
-import { useAuth } from "../../context/auth";
+// import Table from "../../components/list/List";
+// import { useAuth } from "../../context/auth";
+
+
+
 
 
 const Home = () => {
-  // const[auth,setAuth]=useAuth();
-  // alert(auth.token)
- 
+  
   return (
     <div className="home">
       <Sidebar />

@@ -235,8 +235,11 @@ const profilePicUpload=(e,filetype)=>{
     
     return (
       <div className={`newmovie ${progressbar}`}>
-         <CircularProgress className={progressbar} disableShrink/>
-        <Sidebar/>
+         
+         {progressbar==="true"?
+         <CircularProgress className={progressbar} disableShrink/>:
+          <>
+          <Sidebar/>
         <div className='newmoviecontainer'>
           <Navbar/>
           <div className='top'>
@@ -310,7 +313,8 @@ const profilePicUpload=(e,filetype)=>{
                   >
                     <option value="0">Select Genre</option>
                     <option value="comedy">comedy</option>
-                    <option value="serious">serious</option>
+                    <option value="action">Action</option>
+                    <option value="drama">Drama</option>
                   </select>
                   </div>
 
@@ -324,6 +328,7 @@ const profilePicUpload=(e,filetype)=>{
                     <option value="0">Select type</option>
                     <option value="true">Movie</option>
                     <option value="false">series</option>
+                    
                   </select>
                   </div>
                     
@@ -386,6 +391,10 @@ const profilePicUpload=(e,filetype)=>{
             <List userColumns={userColumns} userRows={movies}/>
           </div> */}
         </div>
+          </>
+
+        }
+        
       </div>
     )
   

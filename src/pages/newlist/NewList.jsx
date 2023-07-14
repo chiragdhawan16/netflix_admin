@@ -24,6 +24,7 @@ const NewList = () => {
     
     const getmovies=async()=>{
         try {
+          
             const res = await axios.get(`${process.env.REACT_APP_API}/api/movies`, {
               headers: {                
                  token: "Bearer "+ JSON.parse(localStorage.getItem("netflixauthadmin")).token,
@@ -61,7 +62,7 @@ const NewList = () => {
       {
         return(alert("Select Type of list "))
       }
-       if(content.length<10)   {
+       if(content.length<7)   {
         return(alert("Please Select atleast 10 Movies "))
        }   
        try {
@@ -99,13 +100,12 @@ const NewList = () => {
       setMovieTitles(value1)
 
     }
-
-
-
-    
+ 
     return (
       <div className={`newlist ${progressbar}`}>
-        <CircularProgress className={progressbar} disableShrink/>
+        
+        {progressbar==="true"?<CircularProgress className={progressbar} disableShrink/>:
+        <>
         <Sidebar/>
         <div className='newmoviecontainer'>
           <Navbar/>
@@ -117,8 +117,6 @@ const NewList = () => {
                     <label key={index} >{index+1}. {movie}</label>
                   ))}
               </div>
-            
-                    
                     
             </div>
            
@@ -193,6 +191,9 @@ const NewList = () => {
             </div>
           </div>
         </div>
+        </>
+        }
+        
       </div>
     )
   
